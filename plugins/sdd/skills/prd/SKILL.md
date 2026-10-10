@@ -109,6 +109,15 @@ Faça inferências de **produto** (nunca de tecnologia) e sinalize cada uma com 
 
 Correção pedida em qualquer bloco: corrija **apenas aquele bloco** e reapresente antes de avançar. Após a aprovação final, compile, salve o `.md` e declare o **gate 1 cumprido**, oferecendo o próximo passo: skill `tdd`.
 
+**Camada de apresentação dos gates (obrigatória).** O aparato técnico — identificadores, siglas EARS, referências cruzadas — existe para o documento final e para as etapas seguintes do pipeline, **não para a conversa de aprovação**. Nos gates, apresente cada bloco em linguagem simples:
+
+1. Frases curtas, sem siglas e sem códigos; um requisito aparece como "o que o sistema faz em qual situação", nunca como "RF-007 (EARS-UBI)". No máximo, um código discreto entre parênteses ao fim da frase, quando o usuário precisar citá-lo de volta.
+2. Toda decisão trazida ao usuário segue o padrão: diagnóstico em uma frase → no máximo 3 opções com a consequência de cada → **uma recomendação justificada**. O usuário aprova ou veta; nunca escolhe no vácuo.
+3. Inferências e lacunas são apresentadas como perguntas de confirmação em português comum ("assumi que X; confirma?"), não como listas de premissas codificadas.
+4. O conteúdo integral com IDs, tipos EARS e rastreabilidade entra **apenas** no arquivo `.md` compilado ao final. O usuário aprova significado; o documento carrega a estrutura.
+
+**Verificação por bloco — teste da promessa.** Antes de apresentar cada bloco (e de novo no teste de prontidão final), confira: toda consequência prometida na dor (Seção 2) tem item de escopo que a entrega ou exclusão declarada com motivo (Seção 11)? Promessa órfã é inconsistência — apresente-a ao usuário no gate como decisão, com proposta de resolução, nunca resolva em silêncio.
+
 Extensão alvo: **120–250 linhas** de Markdown.
 
 ---
@@ -249,6 +258,7 @@ Antes de declarar o PRD pronto, verifique:
 3. **Teste da IA:** todo comportamento tem RF atômico, verificável, com CA? O que não está escrito será inventado.
 4. **Teste da rastreabilidade:** todo RF aponta para ESC e CA; toda RN aponta para RF; nenhum ID órfão na matriz.
 5. **Fora do escopo específico:** "features de V2" não basta — nomeie cada exclusão.
+6. **Teste da promessa:** toda consequência mencionada na dor tem item de escopo que a entrega ou exclusão declarada com motivo? Promessa órfã é inconsistência a resolver com o usuário, nunca em silêncio.
 
 ## Saída
 
