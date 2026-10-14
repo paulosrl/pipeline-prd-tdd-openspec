@@ -9,7 +9,7 @@
     {
       "name": "sdd",
       "source": "./plugins/sdd",
-      "description": "Skills /sdd:prd, /sdd:tdd e /sdd:openspec-propose — da ideia de produto ao briefing pronto para o /opsx:propose do OpenSpec"
+      "description": "Skills /sdd:prd, /sdd:tdd e /sdd:briefing — da ideia de produto ao briefing pronto para o /opsx:propose do OpenSpec"
     }
   ]
 }

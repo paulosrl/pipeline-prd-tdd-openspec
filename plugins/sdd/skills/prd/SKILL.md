@@ -262,7 +262,7 @@ Antes de declarar o PRD pronto, verifique:
 
 ## Saída
 
-Salve como `prd-<nome-kebab-case>.md` no diretório de trabalho (ou em `/sessions/<session>/mnt/outputs/` quando existir).
+Salve como `sdd/prd-<nome-kebab-case>.md` na raiz do repositório (ou em `/sessions/<session>/mnt/outputs/` quando existir).
 
 Após salvar:
 1. Entregue o arquivo ao usuário

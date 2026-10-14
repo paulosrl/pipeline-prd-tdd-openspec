@@ -229,7 +229,7 @@ Mudança de decisão técnica durante a implementação = nova versão deste TDD
 
 ## Saída
 
-Salve como `tdd-<nome-kebab-case>.md` ao lado do PRD de origem.
+Salve como `sdd/tdd-<nome-kebab-case>.md`, ao lado do PRD de origem.
 
 Após salvar:
 1. Entregue o arquivo ao usuário

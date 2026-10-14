@@ -37,7 +37,7 @@ claude plugin marketplace add paulosrl/pipeline-prd-tdd-openspec
 claude plugin install sdd@pipeline-prd-tdd-openspec
 ```
 
-As skills ficam disponíveis como `/sdd:prd`, `/sdd:tdd` e `/sdd:openspec-propose`.
+As skills ficam disponíveis como `/sdd:prd`, `/sdd:tdd` e `/sdd:briefing`.
 
 Outras formas — skills avulsas em `~/.claude/skills/`, claude.ai, e prompts portáteis para outras plataformas de IA — em [`docs/instalacao.md`](docs/instalacao.md).
 
@@ -146,10 +146,10 @@ Ponto de partida que a entrevista confirma ou desvia — desvio vira ADR justifi
 
 ---
 
-## Estágio 3 — OpenSpec
+## Estágio 3 — OpenSpec (`skill briefing`)
 
-1. Instale e inicialize o OpenSpec no repositório do projeto (`openspec init`).
-2. Forneça **PRD + TDD** ao prompt de `propose`. A decomposição em changes vem do escopo do PRD; a tecnologia vem dos ADRs do TDD.
+1. Instale e inicialize o OpenSpec no repositório do projeto (`openspec init`), com o `openspec/config.yaml` do kit Trilha AI preenchido: é nele que ficam as regras por artefato (língua, origem citada, um teste por cenário).
+2. Invoque a skill `briefing` com o PRD e o TDD aprovados: ela confere o par, decompõe o escopo em changes ordenadas (com a tabela "Ciclo"), emite um briefing por change e audita o que o `/opsx:propose` gerou. A decomposição em changes vem do escopo do PRD; a tecnologia vem dos ADRs do TDD.
 3. Em cada change gerada, o `design.md` **referencia** os ADRs (`conforme ADR-003`) em vez de redecidir.
 4. Ciclo por change: `propose` → aprovação (Gate 3) → `apply` com assistente de código → verificação (critérios de aceite do PRD viram testes) → `archive`.
 5. Mudança de decisão técnica no meio da implementação = **nova versão do TDD**, nunca ajuste silencioso no `design.md`.
@@ -160,16 +160,24 @@ Ponto de partida que a entrevista confirma ou desvia — desvio vira ADR justifi
 
 ```
 projeto/
-├── prd-<nome>.md        # Estágio 1 — fonte de verdade do produto
-├── tdd-<nome>.md        # Estágio 2 — fonte de verdade das decisões técnicas
-└── openspec/            # Estágio 3 — changes, specs, tasks
+├── sdd/
+│   ├── prd-<nome>.md                  # Estágio 1 — fonte de verdade do produto
+│   ├── tdd-<nome>.md                  # Estágio 2 — fonte de verdade das decisões técnicas
+│   ├── decomposicao-<nome>.md         # Estágio 3 — as changes, a ordem e a tabela "Ciclo"
+│   └── briefing-openspec/
+│       └── briefing-change-NN-<nome>.md
+└── openspec/                          # Estágio 3 — changes, specs, tasks
+    ├── config.yaml                    # contexto e regras por artefato (do kit)
+    ├── specs/
     └── changes/
-        └── 01-<change>/
+        └── NN-<change>/               # arquivada como AAAA-MM-DD-NN-<change>
             ├── proposal.md
-            ├── design.md   # referencia ADRs do TDD
-            ├── spec.md
+            ├── design.md              # referencia ADRs do TDD
+            ├── specs/<capability>/spec.md
             └── tasks.md
 ```
+
+O ciclo de cada change, o nome das pastas, o `ANDAMENTO.md` e a verificação do repositório são regras do kit **Trilha AI** (`CLAUDE-comum.md`), que todo repositório do método copia; este plugin só produz os documentos de `sdd/`.
 
 - Nomes em kebab-case: `prd-agenda-de-contatos.md`, `tdd-agenda-de-contatos.md`.
 - O TDD declara no cabeçalho o PRD e a versão de origem; cada change declara o TDD que a governa.

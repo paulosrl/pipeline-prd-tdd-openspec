@@ -23,7 +23,7 @@ As skills ficam disponíveis com o prefixo do plugin:
 |---|---|
 | `/sdd:prd` | 1 — PRD de produto, agnóstico de tecnologia |
 | `/sdd:tdd` | 2 — Decisão técnica por entrevista, com ADRs |
-| `/sdd:openspec-propose` | 3 — Decomposição, briefing e auditoria para o OpenSpec |
+| `/sdd:briefing` | 3 — Decomposição, briefing e auditoria para o OpenSpec |
 
 Você também pode apenas descrever a tarefa ("preciso de um PRD para...") — o Claude aciona a skill certa pela descrição.
 
@@ -38,7 +38,7 @@ git clone https://github.com/paulosrl/pipeline-prd-tdd-openspec.git
 cp -r pipeline-prd-tdd-openspec/plugins/sdd/skills/* ~/.claude/skills/
 ```
 
-As skills ficam disponíveis sem prefixo: `/prd`, `/tdd`, `/openspec-propose`. Em caso de conflito com skills suas de mesmo nome, a precedência do Claude Code é: empresarial > pessoal > projeto.
+As skills ficam disponíveis sem prefixo: `/prd`, `/tdd`, `/briefing`. Em caso de conflito com skills suas de mesmo nome, a precedência do Claude Code é: empresarial > pessoal > projeto.
 
 Para disponibilizar a um time em um repositório específico, copie para `.claude/skills/` na raiz do repo e faça commit.
 
@@ -52,7 +52,7 @@ Use os prompts portáteis da pasta [`prompts/`](../prompts/): cole o prompt do e
 
 ## Pré-requisito do Estágio 3
 
-O estágio 3 (`openspec-propose`) prepara e audita, mas quem gera os artefatos é o **OpenSpec** dentro do repositório do seu projeto, com um assistente de código (Claude Code, Cursor etc.):
+O estágio 3 (`briefing`) prepara e audita, mas quem gera os artefatos é o **OpenSpec** dentro do repositório do seu projeto, com um assistente de código (Claude Code, Cursor etc.):
 
 ```bash
 npm install -g openspec   # ou o método de instalação vigente do OpenSpec
