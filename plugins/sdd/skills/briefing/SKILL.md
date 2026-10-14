@@ -15,11 +15,11 @@ Estágio 1 — PRD (skill prd)           → aprovado (gate 1)
 Estágio 2 — TDD (skill tdd)           → aprovado (gate 2)
 Estágio 3 — ESTA SKILL (fora do repo) → recepção + decomposição + briefings + auditoria
             /opsx:propose (no repo)   → gera proposal/spec/design/tasks vendo o código
-        ↓ gate 3: artefatos auditados e aprovados
+        ↓ gate 3: a revisão que o OpenSpec pede ao fim do propose, feita como auditoria
 Implementação: /opsx:apply → verificação → archive → próxima change
 ```
 
-**Fronteira inviolável:** esta skill nunca escreve `proposal.md`, `spec.md`, `design.md` ou `tasks.md`. Quem os gera é o OpenSpec nativo, dentro do repositório, com acesso ao código — única posição de onde changes sobre código existente (brownfield) podem ser especificadas corretamente. Se o usuário pedir que esta skill gere os artefatos diretamente, explique a fronteira em duas frases e gere o briefing.
+**Fronteira inviolável:** esta skill nunca escreve `proposal.md`, `spec.md`, `design.md` ou `tasks.md`. Quem os gera é o OpenSpec nativo, dentro do repositório, com acesso ao código — única posição de onde changes sobre código existente (brownfield) podem ser especificadas corretamente. Se o usuário pedir que esta skill gere os artefatos diretamente, explique a fronteira em duas frases e gere o briefing. Ela também não acrescenta passo nem ordem ao fluxo do OpenSpec: age antes do propose, na revisão que ele pede e depois do archive.
 
 **Pré-condições:** PRD aprovado (gate 1) e TDD aprovado (gate 2), com o TDD declarando o PRD de origem. Faltando um, direcione à skill correspondente.
 
@@ -112,7 +112,7 @@ Entregue com as instruções de uso:
 
 ### 4. Auditoria — conferir o que o OpenSpec gerou
 
-Receba os artefatos (colados ou como arquivos) e execute o checklist:
+A auditoria é a revisão que o próprio OpenSpec pede ao fim do propose, antes do apply. Receba os artefatos (colados ou como arquivos) e execute o checklist:
 
 | # | Verificação | Defeito se |
 |---|---|---|
@@ -125,7 +125,7 @@ Receba os artefatos (colados ou como arquivos) e execute o checklist:
 | 7 | Tasks | Task sem spec de origem; ausência de tasks de teste |
 | 8 | Pendências | Pendência herdada resolvida por improviso em vez de contornada |
 
-Emita o **laudo de auditoria**: `APROVADO` (gate 3 cumprido — seguir ao apply) ou lista numerada de defeitos com a correção a pedir ao `/opsx:propose`. Reaudite após correção.
+Emita o **laudo de auditoria**: `APROVADO` (gate 3 cumprido: a revisão terminou e o apply pode começar) ou lista numerada de defeitos, cada um com a correção a pedir ao `/opsx:update`, que revisa os artefatos sem recriá-los, depois da escolha do usuário. Reaudite após correção.
 
 ### 5. Ciclo
 
