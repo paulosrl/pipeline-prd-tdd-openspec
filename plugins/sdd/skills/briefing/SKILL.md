@@ -133,7 +133,7 @@ Após o archive da change, atualize a linha dela na tabela "Ciclo" e retorne ao 
 
 ## Qualidade — antes de emitir cada briefing
 
-1. **Autossuficiência:** o briefing contém os textos na íntegra (RF, RN, CA, ADR)? O /opsx:propose não tem acesso ao PRD/TDD — referência por ID sem o texto é briefing quebrado.
+1. **Autossuficiência:** o briefing contém os textos na íntegra (RF, RN, CA, ADR)? O /opsx:propose lê o PRD e o TDD do repositório, mas eles trazem o escopo de todas as changes: o texto na íntegra fixa o recorte desta, sem que o propose o reconstrua ou parafraseie — referência por ID sem o texto é briefing quebrado.
 2. **Recorte limpo:** nenhum RF aparece em duas changes; nenhum RF do escopo total ficou órfão de change.
 3. **Herança mínima suficiente:** só os ADRs que tocam a change — herança total é ruído.
 4. **Teste do assistente:** com o briefing, o propose consegue trabalhar sem perguntas de produto ou de tecnologia?
