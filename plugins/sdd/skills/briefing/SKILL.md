@@ -78,6 +78,7 @@ Para a change da vez, emita o briefing como bloco de texto pronto para colar no 
 ## Contexto
 Produto: [nome] — PRD prd-<nome>.md v<X.Y> (gate 1) · TDD tdd-<nome>.md v<X.Y> (gate 2).
 Esta é a change NN de [total]; changes anteriores arquivadas: [lista ou "nenhuma"].
+Nome da change no OpenSpec: `NN-<nome>` (a pasta que o propose cria em `openspec/changes/`), salvo exceção no `CLAUDE.md` do repositório.
 
 ## Escopo DESTA change
 [ESC-XXX cobertos. Para cada RF do recorte: ID, tipo EARS, descrição normativa
