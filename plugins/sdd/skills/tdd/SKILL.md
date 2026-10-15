@@ -20,7 +20,7 @@ Estágio 3 — skill briefing     → EM QUE ORDEM. Decomposição e o briefing 
 
 **Pré-condição:** um PRD aprovado (gate 1). Se não existir, ofereça a skill `prd` primeiro. Se o usuário insistir em decidir tecnologia sem PRD, aceite, mas registre no TDD: `⚠️ TDD emitido sem PRD aprovado — decisões sujeitas a revisão quando os requisitos forem formalizados`.
 
-**Pós-condição (gate 2):** TDD aprovado pelo usuário. Só então o pipeline segue para a skill `briefing`, que decompõe o escopo em changes e escreve o briefing de cada uma para o `/opsx:propose`; o `design.md` de cada change referencia os ADRs deste documento em vez de redecidir tecnologia, e mudança de decisão técnica é versão nova do TDD, aprovada antes do código. Essas regras ficam aqui e não no documento: o kit Trilha AI as traz no `CLAUDE-comum.md` e no `openspec/config.yaml`.
+**Pós-condição (gate 2):** TDD aprovado pelo usuário. Só então o pipeline segue para a skill `briefing`, que decompõe o escopo em changes e escreve o briefing de cada uma para o `/opsx:propose`; o `design.md` de cada change, quando o OpenSpec o cria, referencia os ADRs deste documento em vez de redecidir tecnologia, e mudança de decisão técnica é versão nova do TDD, aprovada antes do código. Essas regras ficam aqui e não no documento: o kit Trilha AI as traz no `CLAUDE-comum.md` e no `openspec/config.yaml`.
 
 ## Princípios
 

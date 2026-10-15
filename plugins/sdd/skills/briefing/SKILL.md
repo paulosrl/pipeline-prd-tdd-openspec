@@ -26,7 +26,7 @@ Implementação: /opsx:apply → verificação → archive → próxima change
 ## Princípios
 
 1. **O OpenSpec executa; esta skill prepara e confere.** Entrada de qualidade (briefing) e saída auditada (checklist) — o meio pertence à ferramenta nativa.
-2. **Nada se redecide no caminho.** O briefing instrui explicitamente o propose a referenciar ADRs, nunca reabri-los. Tecnologia redecidida no `design.md` é defeito de auditoria.
+2. **Nada se redecide no caminho.** O briefing entrega os ADRs que tocam a change, sob "NÃO redecidir", para o propose referenciá-los, nunca reabri-los. Tecnologia redecidida no `design.md` é defeito de auditoria.
 3. **Lacuna se devolve, não se resolve.** Falta de requisito → `PEN-PRD-XXX` (volta ao Estágio 1). Falta de decisão técnica → `PEN-TDD-XXX` (volta ao Estágio 2). O briefing lista as pendências que tocam a change; nenhuma se resolve por improviso dentro do OpenSpec.
 4. **Decomposição completa, especificação progressiva.** Todas as changes são nomeadas e ordenadas de uma vez; o briefing é emitido um por vez, quando a change anterior estiver arquivada — a partir da change 02, o propose nativo precisa ver o código que já existe.
 5. **Rastreabilidade é auditável nos dois sentidos.** PRD → artefatos (todo RF virou spec? todo CA virou cenário?) e artefatos → PRD (há spec sem RF? cenário inventado?).
@@ -117,7 +117,7 @@ A auditoria é a revisão que o próprio OpenSpec pede ao fim do propose, antes 
 | 1 | Cobertura PRD → spec | RF do recorte sem spec correspondente |
 | 2 | Cobertura CA → cenário | CA do recorte sem cenário |
 | 3 | Sentido inverso | Spec/cenário sem origem no PRD (invenção) |
-| 4 | Herança técnica | design.md redecide ou omite ADR aplicável |
+| 4 | Herança técnica | design.md (quando o OpenSpec o criou) redecide ou omite ADR aplicável |
 | 5 | Decisões locais | DT local que na verdade contraria/estende ADR |
 | 6 | Escopo | Comportamento de change futura ou de FE-XXX vazou |
 | 7 | Tasks | Task sem spec de origem; ausência de tasks de teste |
