@@ -88,7 +88,6 @@ cenários dos specs que fazem as vezes deles.]
 
 ## Decisões técnicas herdadas (NÃO redecidir)
 [Tabela: aspecto → decisão → ADR-XXX. Extraída do TDD, só o que toca esta change.]
-Instrução: o design.md desta change deve REFERENCIAR estes ADRs pelo ID.
 Decisão local legítima = organização interna de código que o TDD não cobre.
 
 ## Fora desta change
