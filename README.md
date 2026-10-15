@@ -126,6 +126,10 @@ PRD aprovado (Gate 1). Sem PRD, a skill aceita operar, mas marca o TDD como suje
 
 Declare a stack diretamente. A skill valida a coerência com o PRD (restrições, RNFs, entidades), aponta conflitos, registra suas escolhas como ADRs com a sua justificativa e completa por entrevista reduzida apenas o que você não declarou.
 
+### Como usar — modo "como está"
+
+Para o sistema que já existe sem TDD (como o modo homônimo da skill `prd`). A skill lê as decisões no código, nos specs e nos documentos, cada ADR com a evidência por arquivo e símbolo; onde as fontes divergem, pergunta numa rodada única, e cada correção vira uma dívida a fechar por change.
+
 ### Defaults institucionais
 
 Ponto de partida que a entrevista confirma ou desvia — desvio vira ADR justificado, nunca escolha silenciosa:

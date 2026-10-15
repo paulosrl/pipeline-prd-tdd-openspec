@@ -1,7 +1,7 @@
 ---
 name: tdd
 description: >
-  Conduz a decisão técnica de um produto (Estágio 2 do pipeline PRD → TDD → OpenSpec), produzindo um Technical Design Document com ADRs leves, arquitetura, modelo físico de dados e ferramental — a partir de um PRD aprovado e agnóstico de tecnologia. Use esta skill SEMPRE que o usuário: tiver um PRD aprovado e perguntar "e agora?", pedir para "decidir a stack", "escolher tecnologia", "definir arquitetura", "escolher banco de dados", "fazer o design técnico", "criar ADRs", ou mencionar TDD/Technical Design Document. Também acione quando, durante a criação de um PRD, o usuário pedir decisões de tecnologia — essa conversa pertence aqui, não ao PRD. A skill foi desenhada para funcionar com usuários SEM profundidade técnica: entrevista por consequências (nunca por jargão) e recomendação única justificada por decisão. Não use para escrever requisitos de produto (skill prd) nem para gerar artefatos OpenSpec (etapa seguinte).
+  Conduz a decisão técnica de um produto (Estágio 2 do pipeline PRD → TDD → OpenSpec), produzindo um Technical Design Document com ADRs leves, arquitetura, modelo físico de dados e ferramental — a partir de um PRD aprovado e agnóstico de tecnologia. Use esta skill SEMPRE que o usuário: tiver um PRD aprovado e perguntar "e agora?", pedir para "decidir a stack", "escolher tecnologia", "definir arquitetura", "escolher banco de dados", "fazer o design técnico", "criar ADRs", ou mencionar TDD/Technical Design Document. Também acione quando, durante a criação de um PRD, o usuário pedir decisões de tecnologia — essa conversa pertence aqui, não ao PRD. A skill foi desenhada para funcionar com usuários SEM profundidade técnica: entrevista por consequências (nunca por jargão) e recomendação única justificada por decisão. Também registra, no modo "como está", as decisões de um sistema que já existe sem TDD, lidas do código, dos specs e dos documentos. Não use para escrever requisitos de produto (skill prd) nem para gerar artefatos OpenSpec (etapa seguinte).
 ---
 
 # Skill: Decisão Técnica — TDD (Estágio 2)
@@ -13,12 +13,14 @@ Estágio 1 — PRD (skill prd)    → O QUE e POR QUÊ. Já aprovado (gate 1).
         ↓
 Estágio 2 — TDD (esta skill)   → COM O QUÊ. Stack, arquitetura, modelo físico.
         ↓ gate 2: usuário aprova a tecnologia
-Estágio 3 — OpenSpec           → COMO e EM QUE ORDEM. propose recebe PRD + TDD.
+Estágio 3 — skill briefing     → EM QUE ORDEM. Decomposição e o briefing de cada change.
+        ↓
+            /opsx:propose        → COMO. Uma change por vez, a partir do briefing.
 ```
 
 **Pré-condição:** um PRD aprovado (gate 1). Se não existir, ofereça a skill `prd` primeiro. Se o usuário insistir em decidir tecnologia sem PRD, aceite, mas registre no TDD: `⚠️ TDD emitido sem PRD aprovado — decisões sujeitas a revisão quando os requisitos forem formalizados`.
 
-**Pós-condição (gate 2):** TDD aprovado pelo usuário. Só então o pipeline segue para o `propose` do OpenSpec, que passa a referenciar os ADRs deste documento em vez de redecidir tecnologia no `design.md` de cada change.
+**Pós-condição (gate 2):** TDD aprovado pelo usuário. Só então o pipeline segue para a skill `briefing`, que decompõe o escopo em changes e escreve o briefing de cada uma para o `/opsx:propose`; o `design.md` de cada change referencia os ADRs deste documento em vez de redecidir tecnologia.
 
 ## Princípios
 
@@ -37,6 +39,7 @@ Pergunte (ou infira da mensagem): o usuário quer declarar a stack diretamente?
 
 - **Modo expert:** o usuário declara as escolhas. A skill: valida coerência com o PRD (RSTs, RNFs, entidades), aponta conflitos, registra cada escolha como ADR com a justificativa do usuário, e preenche o que ele não declarou via entrevista reduzida. Não questione escolha coerente; questione apenas o que colidir com o PRD ou com restrição declarada.
 - **Modo assistido (padrão):** entrevista completa abaixo.
+- **Modo "como está":** o sistema já existe e não tem TDD; as decisões são lidas, não entrevistadas. Siga a seção "Modo 'como está'", adiante.
 
 ### 1. Ler o PRD e extrair o que já decide por si
 
@@ -147,6 +150,21 @@ Veto em qualquer ADR: reapresente só aquele ADR com nova recomendação. Após 
 
 ---
 
+## Modo "como está": sistema que já existe sem TDD
+
+Use quando o sistema já está construído e não tem TDD: o comum manda escrever o que falta antes da próxima change que toque tecnologia. O TDD registra as decisões que o sistema **já tomou**, lidas do código, dos specs e dos documentos; não decide nada novo. Decisão nova entra numa versão seguinte, aprovada como qualquer outra.
+
+O que muda em relação ao modo assistido:
+
+1. **Contexto:** leia em vez de entrevistar. Onde o código, os documentos e os modelos de origem divergem, ou onde algo parece defeito, pergunte ao usuário numa rodada única, com recomendação; as respostas vão para a seção 7 ("Respostas do usuário") e cada correção vira uma dívida (abaixo), nunca uma mudança no código feita pelo TDD.
+2. **Cabeçalho:** `**Modo de elaboração:** "como está"`, com a versão do produto analisada.
+3. **ADR:** Estado, Decisão e **Evidência** (onde a decisão está no repositório, por arquivo e pelo nome do símbolo ou da seção, nunca por número de linha, que envelhece). Contexto, Opções, Justificativa e Consequências entram quando há o que dizer além do código; decisão sem alternativa considerada não as inventa.
+4. **Teste da cadeia:** a origem "código" vale como causa, desde que a evidência a aponte; resposta do usuário e RNF do PRD continuam valendo.
+5. **Seções a mais:** "Dívidas conhecidas" (cada uma resolvida por change, riscada com a change que a fechou) e "Histórico de versões", depois do handoff.
+6. **Aprovação:** os mesmos três blocos do modo assistido, cada um com o **teste da fidelidade**: toda decisão tem evidência no repositório, e nada descreve o que o sistema não faz.
+
+---
+
 ## Estrutura obrigatória do TDD
 
 ```markdown
@@ -156,7 +174,7 @@ Veto em qualquer ADR: reapresente só aquele ADR com nova recomendação. Após 
 **Versão:** 0.1
 **Data:** [data]
 **PRD de origem:** prd-<nome>.md v<X.Y> (gate 1 cumprido em [data])
-**Modo de elaboração:** assistido | expert
+**Modo de elaboração:** assistido | expert | "como está"
 
 ---
 
@@ -212,7 +230,7 @@ do empacotamento local]
 
 ## 9. Handoff ao Estágio 3
 
-Este TDD, junto ao PRD de origem, é insumo do `propose` OpenSpec.
+Este TDD, junto ao PRD de origem, é insumo da skill `briefing`, que decompõe o escopo em changes e escreve o briefing de cada uma para o `/opsx:propose`.
 Os `design.md` das changes devem REFERENCIAR os ADRs daqui, não redecidir.
 Mudança de decisão técnica durante a implementação = nova versão deste TDD.
 ```
@@ -234,6 +252,6 @@ Salve como `sdd/tdd-<nome-kebab-case>.md`, ao lado do PRD de origem.
 Após salvar:
 1. Entregue o arquivo ao usuário
 2. Resumo de 2 linhas: decisões de porta de um sentido tomadas e pendências devolvidas ao PRD
-3. Declare: "Gate 2 cumprido. Próxima etapa: `propose` OpenSpec, alimentado por PRD + TDD."
+3. Declare: "Gate 2 cumprido. Próxima etapa: a decomposição e os briefings (skill `briefing`), que alimentam o `/opsx:propose`."
 
 **Não** exiba o TDD completo no chat — o arquivo é a entrega.

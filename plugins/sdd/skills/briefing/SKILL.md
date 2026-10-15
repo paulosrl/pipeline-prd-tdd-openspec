@@ -66,7 +66,7 @@ Apresente a tabela (change, ESC/RF cobertos, depende de, razão) e **aguarde apr
 | 02 | — | — | — |
 ```
 
-Uma linha por change, na ordem; `—` enquanto o passo não aconteceu. A decomposição vem **antes de qualquer change** depois de PRD e TDD aprovados; num projeto que já tem changes arquivadas, a tabela nasce com elas.
+Uma linha por change, na ordem; `—` enquanto o passo não aconteceu. Change retirada antes do archive mantém a linha, com `retirada em AAAA-MM-DD` na coluna archive e o motivo; a página do método a mostra como retirada. A decomposição vem **antes de qualquer change** depois de PRD e TDD aprovados; num projeto que já tem changes arquivadas, a tabela nasce com elas.
 
 ### 3. Briefing — a entrada do /opsx:propose
 
