@@ -53,7 +53,7 @@ Derive as changes dos `ESC-XXX`, aplicando os critérios:
 2. **Fundação primeiro:** a change 01 estabelece entidade central + operação primária + esqueleto dos ADRs; as demais incrementam.
 3. **Tamanho de ciclo:** uma change cabe em uma sessão de implementação; grande demais divide, menor que um comportamento completo consolida.
 4. **Dependência em prosa:** ordem declarada com razão ("02 depende de 01 porque exporta o que 01 cadastra").
-5. **Ajuste pequeno não é change:** correção trivial em código arquivado não merece o rito de propose.
+5. **Fora de change, só o que o comum dispensa:** typo, documentação, refatoração sem efeito e ajuste de teste. Toda mudança de requisito, comportamento observável, infraestrutura ou contrato é change, por menor que seja; a decomposição repete essa regra sem ampliá-la.
 
 Apresente a tabela (change, ESC/RF cobertos, depende de, razão) e **aguarde aprovação**. Aprovada, salve `sdd/decomposicao-<nome>.md` — único arquivo de registro desta skill — com a ordem e a razão, as regras de convivência e a tabela "Ciclo", que registra o passo de cada change e é lida pela página do método:
 
@@ -140,6 +140,6 @@ Após o archive da change, atualize a linha dela na tabela "Ciclo" e retorne ao 
 
 ## Saída
 
-Arquivos desta skill: apenas `sdd/decomposicao-<nome>.md` (tabela aprovada, regra do ajuste pequeno e a tabela "Ciclo") e, por ciclo, `sdd/briefing-openspec/briefing-change-NN-<nome>.md`. Artefatos OpenSpec vivem no repositório, gerados pela ferramenta nativa — nunca por esta skill.
+Arquivos desta skill: apenas `sdd/decomposicao-<nome>.md` (tabela aprovada, o que dispensa change e a tabela "Ciclo") e, por ciclo, `sdd/briefing-openspec/briefing-change-NN-<nome>.md`. Artefatos OpenSpec vivem no repositório, gerados pela ferramenta nativa — nunca por esta skill.
 
 Resumo por etapa no chat: recepção (veredicto), decomposição (nº de changes), briefing (change e recorte), auditoria (laudo).

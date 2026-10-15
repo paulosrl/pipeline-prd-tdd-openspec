@@ -1,7 +1,7 @@
 ---
 name: prd
 description: >
-  Cria Product Requirements Documents (PRDs) de produto, agnósticos de tecnologia, prontos para alimentar a etapa de decisão técnica (skill tdd) e, na sequência, o handoff ao OpenSpec. Use esta skill SEMPRE que o usuário mencionar: PRD, Product Requirements Document, "escrever requisitos de produto", "documentar uma feature", "criar especificação de produto", "preciso de um PRD para X", "quero documentar esse sistema", ou qualquer variante. Também acione quando o usuário descrever um produto ou funcionalidade e pedir para estruturar, documentar, especificar ou preparar para desenvolvimento — mesmo sem usar a palavra "PRD". O PRD desta skill define O QUE o produto faz e POR QUÊ; ele NÃO decide stack, arquitetura nem modelo físico de dados — essas decisões pertencem à skill tdd (estágio 2). Se o usuário pedir decisão de tecnologia, arquitetura ou banco de dados, direcione para a skill tdd.
+  Cria Product Requirements Documents (PRDs) de produto, agnósticos de tecnologia, prontos para alimentar a etapa de decisão técnica (skill tdd) e, na sequência, o handoff ao OpenSpec. Use esta skill SEMPRE que o usuário mencionar: PRD, Product Requirements Document, "escrever requisitos de produto", "documentar uma feature", "criar especificação de produto", "preciso de um PRD para X", "quero documentar esse sistema", ou qualquer variante. Também acione quando o usuário descrever um produto ou funcionalidade e pedir para estruturar, documentar, especificar ou preparar para desenvolvimento — mesmo sem usar a palavra "PRD". O PRD desta skill define O QUE o produto faz e POR QUÊ; ele NÃO decide stack, arquitetura nem modelo físico de dados — essas decisões pertencem à skill tdd (estágio 2). Se o usuário pedir decisão de tecnologia, arquitetura ou banco de dados, direcione para a skill tdd. Também escreve, no modo "como está", o PRD de um sistema que já existe sem PRD, lido dos specs, do README e do código.
 ---
 
 # Skill: Criar PRD (Estágio 1 — Produto)
@@ -122,7 +122,23 @@ Extensão alvo: **120–250 linhas** de Markdown.
 
 ---
 
-## Estrutura obrigatória do PRD
+## Modo "como está": sistema que já existe sem PRD
+
+Use quando o sistema já está construído e não tem PRD: o comum manda escrever o que falta antes da próxima change que toque requisito. O PRD descreve o que o sistema **já faz**, lido dos specs em `openspec/specs/`, do README e do código; não cria requisito novo. Requisito novo entra numa versão seguinte do PRD, aprovada como qualquer outra.
+
+O que muda em relação ao modo normal:
+
+1. **Contexto:** leia em vez de perguntar. Pergunte só o que não estiver escrito em lugar nenhum (em geral, a dor e para quem), numa rodada única.
+2. **Cabeçalho:** além de Status, Versão e Data, a linha `**Modo:** "como está"`, dizendo de onde o PRD foi lido e que a estrutura é a reduzida deste modo.
+3. **Estrutura reduzida**, nesta ordem: 1. O que é e por quê (o que é, a dor, para quem); 2. Escopo (o que está dentro e o que está fora, com o motivo); 3. Requisitos funcionais, numa tabela `Código | Requisito | Origem`, com o spec de origem pelo nome; 4. Regras (`RN-XXX`); 5. Requisitos não funcionais de produto; 6. Critérios de aceite; 7. Histórico de versões. Métricas, entidades, fluxos e matriz só entram se o sistema os justificar; a coluna "Origem" faz as vezes da matriz.
+4. **Requisitos:** um por comportamento, verificável, sem tecnologia; o tipo EARS é opcional. Os specs anteriores ao método não citam o RF: a ligação é a coluna "Origem", declarada no PRD; todo requisito novo ou modificado depois cita o RF.
+5. **Critérios de aceite:** os cenários dos specs, apontados na seção 6, sem copiá-los. Requisito sem spec que o descreva (lido do README ou do código) ganha critério em Gherkin na própria seção 6.
+6. **Aprovação:** dois blocos, com a mesma camada de apresentação: bloco A, seções 1 e 2; bloco B, seções 3 a 6. Antes de cada bloco, o **teste da fidelidade**: toda afirmação tem origem num spec, no README ou no código, e nada descreve o que o sistema não faz. Comportamento que parece defeito não se corrige no PRD: apresente-o ao usuário como decisão (descrever como está ou abrir uma correção).
+7. **Prontidão:** valem os testes da troca de stack, do leigo e da rastreabilidade (todo RF com origem; todo spec com ao menos um RF). Extensão alvo: **60–150 linhas**.
+
+---
+
+## Estrutura obrigatória do PRD (modo normal)
 
 ```markdown
 # PRD: [Nome do Produto / Feature]
