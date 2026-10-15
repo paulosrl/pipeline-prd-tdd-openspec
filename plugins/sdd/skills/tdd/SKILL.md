@@ -156,11 +156,11 @@ Use quando o sistema já está construído e não tem TDD: o comum manda escreve
 
 O que muda em relação ao modo assistido:
 
-1. **Contexto:** leia em vez de entrevistar. Onde o código, os documentos e os modelos de origem divergem, ou onde algo parece defeito, pergunte ao usuário numa rodada única, com recomendação; as respostas vão para a seção 7 ("Respostas do usuário") e cada correção vira uma dívida (abaixo), nunca uma mudança no código feita pelo TDD.
+1. **Contexto:** leia em vez de entrevistar. Onde o código, os documentos e os modelos de origem divergem, ou onde algo parece defeito, pergunte ao usuário numa rodada única, com recomendação; as respostas vão para a seção 7, que neste modo se chama "Respostas do usuário (anexo)", no lugar de "Respostas da Entrevista", e cada correção vira uma dívida (abaixo), nunca uma mudança no código feita pelo TDD.
 2. **Cabeçalho:** `**Modo de elaboração:** "como está"`, com a versão do produto analisada.
 3. **ADR:** Estado, Decisão e **Evidência** (onde a decisão está no repositório, por arquivo e pelo nome do símbolo ou da seção, nunca por número de linha, que envelhece). Contexto, Opções, Justificativa e Consequências entram quando há o que dizer além do código; decisão sem alternativa considerada não as inventa.
 4. **Teste da cadeia:** a origem "código" vale como causa, desde que a evidência a aponte; resposta do usuário e RNF do PRD continuam valendo.
-5. **Seções a mais:** "Dívidas conhecidas" (cada uma resolvida por change, riscada com a change que a fechou) e "Histórico de versões", depois do handoff.
+5. **Seções a mais:** "Dívidas conhecidas" (cada uma resolvida por change, riscada com a change que a fechou) e "Histórico de versões", as duas depois do handoff, nesta ordem.
 6. **Aprovação:** os mesmos três blocos do modo assistido, cada um com o **teste da fidelidade**: toda decisão tem evidência no repositório, e nada descreve o que o sistema não faz.
 
 ---

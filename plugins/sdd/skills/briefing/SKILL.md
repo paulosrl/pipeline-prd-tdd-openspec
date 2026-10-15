@@ -6,7 +6,7 @@ description: >
 
 # Skill: Ponte para o OpenSpec (Estágio 3 — adaptador)
 
-Chama-se `briefing` para não se confundir com a skill `openspec-propose` nativa do OpenSpec, que é quem gera os artefatos. As regras comuns do repositório (o ciclo, os nomes das pastas, a verificação) vêm do kit Trilha AI (`CLAUDE-comum.md`); esta skill não as repete.
+Chama-se `briefing` para não se confundir com o propose do OpenSpec (`/opsx:propose`), que é quem gera os artefatos. As regras comuns do repositório (o ciclo, os nomes das pastas, o que dispensa change, a verificação) vêm do kit Trilha AI (`CLAUDE-comum.md`); esta skill as cita e não as repete.
 
 ## Posição no pipeline e divisão de trabalho
 
@@ -21,7 +21,7 @@ Implementação: /opsx:apply → verificação → archive → próxima change
 
 **Fronteira inviolável:** esta skill nunca escreve `proposal.md`, `spec.md`, `design.md` ou `tasks.md`. Quem os gera é o OpenSpec nativo, dentro do repositório, com acesso ao código — única posição de onde changes sobre código existente (brownfield) podem ser especificadas corretamente. Se o usuário pedir que esta skill gere os artefatos diretamente, explique a fronteira em duas frases e gere o briefing. Ela também não acrescenta passo nem ordem ao fluxo do OpenSpec: age antes do propose, na revisão que ele pede e depois do archive.
 
-**Pré-condições:** PRD aprovado (gate 1) e TDD aprovado (gate 2), com o TDD declarando o PRD de origem. Faltando um, direcione à skill correspondente.
+**Pré-condições:** PRD aprovado (gate 1) e TDD aprovado (gate 2), com o TDD declarando o PRD de origem. Faltando um, direcione à skill correspondente, salvo o briefing curto que o `CLAUDE-comum.md` admite num projeto que nasceu sem PRD ou TDD.
 
 ## Princípios
 
@@ -53,20 +53,20 @@ Derive as changes dos `ESC-XXX`, aplicando os critérios:
 2. **Fundação primeiro:** a change 01 estabelece entidade central + operação primária + esqueleto dos ADRs; as demais incrementam.
 3. **Tamanho de ciclo:** uma change cabe em uma sessão de implementação; grande demais divide, menor que um comportamento completo consolida.
 4. **Dependência em prosa:** ordem declarada com razão ("02 depende de 01 porque exporta o que 01 cadastra").
-5. **Fora de change, só o que o comum dispensa:** typo, documentação, refatoração sem efeito e ajuste de teste. Toda mudança de requisito, comportamento observável, infraestrutura ou contrato é change, por menor que seja; a decomposição repete essa regra sem ampliá-la.
+5. **Fora de change, só o que o `CLAUDE-comum.md` dispensa:** a decomposição cita essa regra, sem repeti-la nem ampliá-la.
 
-Apresente a tabela (change, ESC/RF cobertos, depende de, razão) e **aguarde aprovação**. Aprovada, salve `sdd/decomposicao-<nome>.md` — único arquivo de registro desta skill — com a ordem e a razão, as regras de convivência e a tabela "Ciclo", que registra o passo de cada change e é lida pela página do método:
+Apresente a tabela (change, ESC/RF cobertos, depende de, razão) e **aguarde aprovação**. Aprovada, salve `sdd/decomposicao-<nome>.md` — único arquivo de registro desta skill — com a ordem e a razão, as regras de convivência e a tabela "Ciclo", que registra os marcos de cada change (briefing, auditoria, archive) e é lida pela página do método:
 
 ```markdown
 ## Ciclo
 
 | NN | briefing | auditoria | archive |
 |---|---|---|---|
-| 01 | briefing-change-01-<nome>.md (aprovado AAAA-MM-DD) | gate 3 aprovado AAAA-MM-DD | arquivada em AAAA-MM-DD-01-<nome> |
+| 01 | briefing-change-01-<nome>.md (aprovado AAAA-MM-DD) | gate 3 aprovado AAAA-MM-DD | arquivada em <pasta que o archive criou> |
 | 02 | — | — | — |
 ```
 
-Uma linha por change, na ordem; `—` enquanto o passo não aconteceu. Change retirada antes do archive mantém a linha, com `retirada em AAAA-MM-DD` na coluna archive e o motivo; a página do método a mostra como retirada. A decomposição vem **antes de qualquer change** depois de PRD e TDD aprovados; num projeto que já tem changes arquivadas, a tabela nasce com elas.
+Uma linha por change, na ordem; `—` enquanto o passo não aconteceu. Change retirada antes do archive mantém a linha, com `retirada em AAAA-MM-DD` na coluna archive e o motivo; a página do método a mostra como retirada. Num projeto que já tem changes arquivadas, a tabela nasce com elas.
 
 ### 3. Briefing — a entrada do /opsx:propose
 
@@ -90,8 +90,6 @@ cenários dos specs que fazem as vezes deles.]
 [Tabela: aspecto → decisão → ADR-XXX. Extraída do TDD, só o que toca esta change.]
 Instrução: o design.md desta change deve REFERENCIAR estes ADRs pelo ID.
 Decisão local legítima = organização interna de código que o TDD não cobre.
-Qualquer necessidade de contrariar ou estender um ADR: PARE e reporte como
-pendência — não decida.
 
 ## Fora desta change
 [ESCs das changes seguintes + FE-XXX do PRD. Comportamento daqui não entra.]
@@ -126,7 +124,7 @@ A auditoria é a revisão que o próprio OpenSpec pede ao fim do propose, antes 
 | 7 | Tasks | Task sem spec de origem; ausência de tasks de teste |
 | 8 | Pendências | Pendência herdada resolvida por improviso em vez de contornada |
 
-Emita o **laudo de auditoria**: `APROVADO` (gate 3 cumprido: a revisão terminou e o apply pode começar) ou lista numerada de defeitos, cada um com a correção a pedir ao `/opsx:update`, que revisa os artefatos sem recriá-los, depois da escolha do usuário. Reaudite após correção.
+Emita o **laudo de auditoria**: `APROVADO` (gate 3 cumprido: a revisão terminou e o apply pode começar) ou lista numerada de defeitos, cada um com a correção a pedir ao `/opsx:update`, que revisa os artefatos sem recriá-los. Reaudite após correção.
 
 ### 5. Ciclo
 
