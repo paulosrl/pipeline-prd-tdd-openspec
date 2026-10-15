@@ -13,7 +13,7 @@ Chama-se `briefing` para não se confundir com a skill `openspec-propose` nativa
 ```
 Estágio 1 — PRD (skill prd)           → aprovado (gate 1)
 Estágio 2 — TDD (skill tdd)           → aprovado (gate 2)
-Estágio 3 — ESTA SKILL (fora do repo) → recepção + decomposição + briefings + auditoria
+Estágio 3 — ESTA SKILL (antes do propose) → recepção + decomposição + briefings + auditoria
             /opsx:propose (no repo)   → gera proposal/spec/design/tasks vendo o código
         ↓ gate 3: a revisão que o OpenSpec pede ao fim do propose, feita como auditoria
 Implementação: /opsx:apply → verificação → archive → próxima change
@@ -40,7 +40,7 @@ Leia os dois documentos e verifique:
 1. O TDD referencia este PRD na versão vigente?
 2. Todo `RST-XXX` do PRD foi tratado no TDD (ADR ou dispensa justificada)?
 3. Há `PEN-TDD-XXX` aberta que bloqueie a primeira change?
-4. Todo `ESC-XXX` tem RF; todo RF tem CA? Num PRD "como está", escrito de um sistema que já tem specs, os cenários dos specs fazem as vezes dos CAs: aceite, e o teste de cada cenário leva o código do RF no nome.
+4. Todo `ESC-XXX` tem RF; todo RF tem CA? Num PRD "como está", escrito de um sistema que já tem specs, os cenários dos specs fazem as vezes dos CAs: aceite; o nome do teste de cada cenário segue a regra de tarefas do `openspec/config.yaml`.
 5. Os ADRs cobrem o mínimo para implementar (topologia, linguagem, persistência, interface, ferramental)?
 
 Emita no chat o **relatório de recepção**: `ACEITO` | `ACEITO_COM_PENDENCIAS` (listadas, com estágio de destino) | `DEVOLVIDO` (o que falta, para qual skill). Prossiga apenas de ACEITO/ACEITO_COM_PENDENCIAS.
@@ -129,7 +129,7 @@ Emita o **laudo de auditoria**: `APROVADO` (gate 3 cumprido: a revisão terminou
 
 ### 5. Ciclo
 
-Após o archive da change, atualize a linha dela na tabela "Ciclo" e retorne ao passo 3 para o briefing da próxima — agora com "changes arquivadas" atualizado, para o propose nativo tratar o código existente como brownfield.
+Após o archive da change e os passos que o `openspec/config.yaml` manda fazer depois dele (entre eles, a linha da change na tabela "Ciclo"), retorne ao passo 3 para o briefing da próxima — agora com "changes arquivadas" atualizado, para o propose nativo tratar o código existente como brownfield.
 
 ## Qualidade — antes de emitir cada briefing
 
